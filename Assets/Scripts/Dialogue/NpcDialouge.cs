@@ -24,6 +24,8 @@ public class DialogueChoice
     public string[] choices; // choice
     public int[] nextDialogueIndexes; // make dialogue go to the choice we choose
     public bool[] TriggerEvent;
+    public string[] result;
+    public ActionType[] actionChoices;
 }
 
 [System.Serializable]

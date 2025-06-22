@@ -26,8 +26,12 @@ MonoBehaviour:
   choices:
   - dialogueIndex: 1
     choices:
-    - three
+    - change
     - foir
     nextDialogueIndexes: 0200000003000000
-    TriggerEvent: 0000
+    TriggerEvent: 0100
+    result:
+    - 1
+    - 
+    actionChoices: 0300000000000000
   ActionsTrigger: []

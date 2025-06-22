@@ -109,20 +109,40 @@ public class ObjectThatCanClick : MonoBehaviour, Clickable
         {
             int nextIndex = choice.nextDialogueIndexes[i];
             bool triggerEvent = choice.TriggerEvent[i];
-            dialogueUI.CreateChoiceButton(choice.choices[i], () => ChooseOption(nextIndex, triggerEvent, result));
+            string result = choice.result[i];
+            Enum action = choice.actionChoices[i];
+            dialogueUI.CreateChoiceButton(choice.choices[i], () => ChooseOption(nextIndex, triggerEvent, result, action));
         }
     }
 
-    void ChooseOption(int nextIndex, bool triggerEvent, string result)
+    void ChooseOption(int nextIndex, bool triggerEvent, string result, Enum action)
     {
-        if (triggerEvent)
-        {
-            Debug.Log("Hi after you choose choice it will do something");
-
-        }
         dialogueIndex = nextIndex;
         dialogueUI.ClearChoices();
         DisplayCurrentLine();
+
+        if (triggerEvent)
+        {
+            switch (action)
+            {
+                case ActionType.Nothing:
+                    return;
+
+                case ActionType.Load:
+                    Debug.Log($"Load {result}");
+                    EventController.Instance.LoadSceneWithName(result);
+                    return;
+
+                case ActionType.GiveItem:
+                    Debug.Log($"Give {result}");
+                    return;
+
+                case ActionType.ChangeCursePainting:
+                    EventController.Instance.ChangePainting(result);
+                    return;
+
+            }
+        }
     }
 
     void DisplayCurrentLine()
