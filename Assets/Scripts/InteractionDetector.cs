@@ -17,6 +17,7 @@ public class InteractionDetector : MonoBehaviour
     {
         if (context.performed)
         {
+            Debug.Log("interact");
             interactableInRange?.Interact();
         }
     }
@@ -25,6 +26,7 @@ public class InteractionDetector : MonoBehaviour
     {
         if (collision.TryGetComponent(out Clickable interactable) && interactable.CanClick())
         {
+            Debug.Log("in");
             interactableInRange = interactable;
             interactionIcon.SetActive(true);
         }
@@ -34,6 +36,7 @@ public class InteractionDetector : MonoBehaviour
     {
         if (collision.TryGetComponent(out Clickable interactable) && interactable == interactableInRange)
         {
+            Debug.Log("out");
             interactableInRange = null;
             interactionIcon.SetActive(false);
         }

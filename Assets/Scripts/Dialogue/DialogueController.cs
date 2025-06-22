@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class DialougeController : MonoBehaviour
@@ -10,11 +11,15 @@ public class DialougeController : MonoBehaviour
     public TMP_Text dialogueText, nameText;
     public Transform choiceContainer;
     public GameObject choiceButtonPrefab;
+    public GameObject _mouse;
 
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        _mouse = GameObject.Find("Mouse");
+        PlayerInput Pinput = _mouse.GetComponent<PlayerInput>();
     }
 
     public void showDialogueUI(bool show)
@@ -34,6 +39,7 @@ public class DialougeController : MonoBehaviour
 
     public void ClearChoices()
     {
+        EnableInput();
         foreach (Transform child in choiceContainer) Destroy(child.gameObject);
     }
 
@@ -42,5 +48,25 @@ public class DialougeController : MonoBehaviour
         GameObject choiceButton = Instantiate(choiceButtonPrefab, choiceContainer);
         choiceButton.GetComponentInChildren<TMP_Text>().text = choiceText;
         choiceButton.GetComponent<Button>().onClick.AddListener(onClick);
+    }
+
+    public void DisableMouseMove()
+    {
+        _mouse.GetComponent<CameraFollow>().enabled = false;
+    }
+
+    public void EnableMouseMove()
+    {
+        _mouse.GetComponent<CameraFollow>().enabled = true;
+    }
+
+    public void DisableInput()
+    {
+        _mouse.GetComponent<PlayerInput>().enabled = false;
+    }
+
+    public void EnableInput()
+    {
+        _mouse.GetComponent<PlayerInput>().enabled = true;
     }
 }

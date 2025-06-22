@@ -384,7 +384,7 @@ Transform:
   m_GameObject: {fileID: 347140135}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.457243, y: -2.3129265, z: -5}
+  m_LocalPosition: {x: 4.457243, y: -2.3129265, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -410,7 +410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &533168704
 RectTransform:
   m_ObjectHideFlags: 0
@@ -498,7 +498,6 @@ GameObject:
   - component: {fileID: 635384612}
   - component: {fileID: 635384611}
   - component: {fileID: 635384614}
-  - component: {fileID: 635384613}
   - component: {fileID: 635384615}
   m_Layer: 0
   m_Name: TheThing
@@ -577,35 +576,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &635384613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 635384610}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 864062495}
-          m_TargetAssemblyTypeName: Scene02EventStart, Assembly-CSharp
-          m_MethodName: NextButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!61 &635384614
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -937,7 +907,8 @@ MonoBehaviour:
   dialogueText: {fileID: 1168184047}
   nameText: {fileID: 169216023}
   choiceContainer: {fileID: 770245899}
-  choiceButtonPrefab: {fileID: 0}
+  choiceButtonPrefab: {fileID: 9022544768444028465, guid: 60ccf2aedb8934541ae7109ff76df948, type: 3}
+  _mouse: {fileID: 0}
 --- !u!114 &842402433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1083,11 +1054,12 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 1.1365963, y: 7.3969517}
-      - {x: -12.87851, y: 7.487479}
-      - {x: -12.817428, y: -7.822466}
-      - {x: 1.2049209, y: -7.869195}
-      - {x: 15.078409, y: -7.8510838}
-      - {x: 15.138791, y: 7.3775377}
+      - {x: -12.994634, y: 7.3902884}
+      - {x: -12.990537, y: -7.969928}
+      - {x: 1.2049209, y: -7.974189}
+      - {x: 15.163616, y: -7.970373}
+      - {x: 15.162361, y: -0.044189095}
+      - {x: 15.165118, y: 7.389083}
   m_UseDelaunayMesh: 0
 --- !u!4 &889292233
 Transform:
@@ -1098,7 +1070,7 @@ Transform:
   m_GameObject: {fileID: 889292231}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.585715, y: 2.7907295, z: -478.6994}
+  m_LocalPosition: {x: -5.585715, y: 2.7907295, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

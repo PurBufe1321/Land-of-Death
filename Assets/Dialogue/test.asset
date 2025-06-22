@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: Name
   dialogueLines:
-  - dwdwd
-  - bruh
-  - wawawa
-  - wawawa
+  - first
+  - second
+  - thrid
+  - forth
   endDialogueLines: 00000101
   SceneNumUpDown: 
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
   choices:
-  - dialogueIndex: 2
+  - dialogueIndex: 1
     choices:
-    - ww
-    - wwwww
-    nextDialogueIndexes: 02000000
-    TriggerEvent: 
+    - three
+    - foir
+    nextDialogueIndexes: 0200000003000000
+    TriggerEvent: 0000
   ActionsTrigger: []

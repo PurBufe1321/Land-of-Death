@@ -5,6 +5,8 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using System;
 using UnityEditor.PackageManager;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class ObjectThatCanClick : MonoBehaviour, Clickable
 {
@@ -14,7 +16,6 @@ public class ObjectThatCanClick : MonoBehaviour, Clickable
 
     private int dialogueIndex;
     private bool isTyping, isDialogueActive;
-
     private void Start()
     {
         dialogueUI = DialougeController.Instance;
@@ -41,6 +42,7 @@ public class ObjectThatCanClick : MonoBehaviour, Clickable
 
     void StartDialogue()
     {
+        dialogueUI.DisableMouseMove();
         isDialogueActive = true;
         dialogueIndex = 0;
         dialogueUI.SetNPCInfo(dialogueData.npcName);
@@ -59,6 +61,7 @@ public class ObjectThatCanClick : MonoBehaviour, Clickable
         }
 
         dialogueUI.ClearChoices();
+        dialogueUI.EnableInput();
 
         if (dialogueData.endDialogueLines.Length > dialogueIndex && dialogueData.endDialogueLines[dialogueIndex])
         {
@@ -70,6 +73,7 @@ public class ObjectThatCanClick : MonoBehaviour, Clickable
         {
             if (dialogueChoice.dialogueIndex == dialogueIndex)
             {
+                dialogueUI.DisableInput();
                 DisplayChoices(dialogueChoice);
                 return;
             }
@@ -105,15 +109,16 @@ public class ObjectThatCanClick : MonoBehaviour, Clickable
         {
             int nextIndex = choice.nextDialogueIndexes[i];
             bool triggerEvent = choice.TriggerEvent[i];
-            dialogueUI.CreateChoiceButton(choice.choices[i], () => ChooseOption(nextIndex, triggerEvent));
+            dialogueUI.CreateChoiceButton(choice.choices[i], () => ChooseOption(nextIndex, triggerEvent, result));
         }
     }
 
-    void ChooseOption(int nextIndex, bool triggerEvent)
+    void ChooseOption(int nextIndex, bool triggerEvent, string result)
     {
         if (triggerEvent)
         {
             Debug.Log("Hi after you choose choice it will do something");
+
         }
         dialogueIndex = nextIndex;
         dialogueUI.ClearChoices();
@@ -129,9 +134,10 @@ public class ObjectThatCanClick : MonoBehaviour, Clickable
     public void EndDialogue()
     {
         StopAllCoroutines();
-        isDialogueActive = false;
+        isDialogueActive = false;       
         dialogueUI.SetDialogueText("");
         dialogueUI.showDialogueUI(false);
+        dialogueUI.EnableMouseMove();
         if (dialogueData != null && dialogueData.ActionsTrigger != null && dialogueData.ActionsTrigger.Count > 0)
         {
             Debug.Log($"There will have {dialogueData.ActionsTrigger.Count} event happen");
