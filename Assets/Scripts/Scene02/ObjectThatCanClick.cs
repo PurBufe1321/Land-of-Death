@@ -10,10 +10,11 @@ using UnityEngine.Windows;
 
 public class ObjectThatCanClick : MonoBehaviour, Clickable
 {
+    public static LaNubPuzzle Instance { get; private set; }
     private ActionType type;
     public NpcDialouge dialogueData;
     private DialougeController dialogueUI;
-
+    
     private int dialogueIndex;
     private bool isTyping, isDialogueActive;
     private void Start()
@@ -140,7 +141,26 @@ public class ObjectThatCanClick : MonoBehaviour, Clickable
                 case ActionType.ChangeCursePainting:
                     EventController.Instance.ChangePainting(result);
                     return;
-
+                case ActionType.LaNabPuzzleOn:
+                    dialogueUI.showLaNabUI(true);
+                    StopAllCoroutines();
+                    isDialogueActive = false;
+                    dialogueUI.SetDialogueText("");
+                    dialogueUI.showDialogueUI(false);
+                    dialogueUI.DisableInput();
+                    return;
+                case ActionType.MC_CCP_Bad:
+                    EventController.Instance.MC_CCP_Bad(result);
+                    return;
+                case ActionType.MC_CCP_Good:
+                    EventController.Instance.MC_CCP_Good(result);
+                    return;
+                case ActionType.CheckingNote:
+                    EventController.Instance.CheckingNote(result);
+                    return;
+                case ActionType.TurnMusicIntoScene4:
+                    EventController.Instance.TurnMusicIntoScene4();
+                    return;
             }
         }
     }
@@ -181,6 +201,22 @@ public class ObjectThatCanClick : MonoBehaviour, Clickable
             case ActionType.GiveItem:
                 Debug.Log($"Give {ActionToDo.stringParameter}");
                 return;
-        }
+            case ActionType.OneTimeOnlyChat:
+                Debug.Log("Test");
+                GameObject destoryobj = GameObject.Find($"{ActionToDo.stringParameter}");
+                Destroy(destoryobj);
+                return;
+            case ActionType.AddNextDialogue:
+                GameObject objActivate = GameObject.Find($"{ActionToDo.stringParameter}");
+                objActivate.GetComponent<BoxCollider2D>().enabled = true;
+                return;
+            case ActionType.NoteUp:
+                EventController.Instance.NoteUp(ActionToDo.stringParameter);
+                return;
+            case ActionType.TurnMusicIntoScene4:
+                EventController.Instance.TurnMusicIntoScene4();
+                return;
+
+}
     }
 }

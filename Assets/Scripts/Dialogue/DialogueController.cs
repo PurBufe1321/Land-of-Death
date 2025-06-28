@@ -11,6 +11,7 @@ public class DialougeController : MonoBehaviour
     public TMP_Text dialogueText, nameText;
     public Transform choiceContainer;
     public GameObject choiceButtonPrefab;
+    public GameObject _LaNabUI;
     public GameObject _mouse;
 
     void Awake()
@@ -25,6 +26,11 @@ public class DialougeController : MonoBehaviour
     public void showDialogueUI(bool show)
     {
         dialoguePanel.SetActive(show);
+    }
+
+    public void showLaNabUI(bool show)
+    {
+        _LaNabUI.SetActive(show);
     }
 
     public void SetNPCInfo(string npcname)

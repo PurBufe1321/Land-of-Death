@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMOD.Studio;
+using JetBrains.Annotations;
 
 public class Scene01Events : MonoBehaviour
 {
+
+    [SerializeField] private MusicScene scene;
     public GameObject fadeScreenIn;
     public GameObject textBox;
     public CameraFollow camCanMove;
@@ -17,6 +21,7 @@ public class Scene01Events : MonoBehaviour
     [SerializeField] GameObject charName;
     [SerializeField] GameObject Door;
     [SerializeField] GameObject Fadeout;
+    private EventInstance FootsSteps;
     void Update()
     {
         textLength = TextCreator.charCount;
@@ -25,6 +30,7 @@ public class Scene01Events : MonoBehaviour
     void Start()
     {
         StartCoroutine(EventStarter());
+        FootsSteps = AudioController.instance.CreateEventInstance(FMOD_Event.instance.EnterRoom);
     }
 
     IEnumerator EventStarter()
@@ -93,11 +99,18 @@ public class Scene01Events : MonoBehaviour
 
     IEnumerator NextRoom()
     {
+        PLAYBACK_STATE playbackState;
+        FootsSteps.getPlaybackState(out playbackState);
+        if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+        {
+            FootsSteps.start();
+        }
+
         Debug.Log("Load");
         Fadeout.SetActive(true);
         yield return new WaitForSeconds(3);
+        FootsSteps.stop(STOP_MODE.ALLOWFADEOUT);
+        AudioController.instance.SetMusicScene(scene);
         SceneManager.LoadScene(1);
     }
-
-
 }

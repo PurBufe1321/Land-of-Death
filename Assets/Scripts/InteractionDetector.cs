@@ -6,18 +6,19 @@ using UnityEngine.Windows;
 public class InteractionDetector : MonoBehaviour
 {
     private Clickable interactableInRange = null;
-    public GameObject interactionIcon;
+    public GameObject interactionIconNormal;
+    public GameObject interactionIconCard;
 
     private void Start()
     {
-        interactionIcon.SetActive(false);
+        interactionIconNormal.SetActive(false);
+        interactionIconCard.SetActive(false);
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            Debug.Log("interact");
             interactableInRange?.Interact();
         }
     }
@@ -26,9 +27,16 @@ public class InteractionDetector : MonoBehaviour
     {
         if (collision.TryGetComponent(out Clickable interactable) && interactable.CanClick())
         {
-            Debug.Log("in");
-            interactableInRange = interactable;
-            interactionIcon.SetActive(true);
+            if (collision == GameObject.FindGameObjectWithTag("card"))
+            {
+                interactionIconCard.SetActive(true);
+                interactableInRange = interactable;
+            }
+            else
+            {
+                interactionIconNormal.SetActive(true);
+                interactableInRange = interactable;
+            }
         }
     }
 
@@ -36,9 +44,9 @@ public class InteractionDetector : MonoBehaviour
     {
         if (collision.TryGetComponent(out Clickable interactable) && interactable == interactableInRange)
         {
-            Debug.Log("out");
             interactableInRange = null;
-            interactionIcon.SetActive(false);
+            interactionIconNormal.SetActive(false);
+            interactionIconCard.SetActive(false);
         }
     }
 }
